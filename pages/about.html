@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · ChemLab Explorer</title>
+<meta name="description" content="How to use ChemLab Explorer in class, presentation keys, safety and credits.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f4f6f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../images/icons/favicon.svg" type="image/svg+xml">
+<!-- sets the theme and language before the page is drawn -->
+<script src="../js/boot.js"></script>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/about.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
+</head>
+<body data-page="about" data-root="../" data-title-key="navAbout">
+<!-- the icon set (images/icons/) is put into the page here -->
+<script src="../js/icons.js"></script>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<!-- ================= APP BAR ================= -->
+<header class="appbar">
+  <div class="container">
+    <a class="brand" href="../index.html" data-nav="home" aria-label="ChemLab Explorer">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#i-brand"/></svg>
+      <span class="brand-name">ChemLab <i>Explorer</i></span>
+    </a>
+    <nav class="nav" aria-label="Main" data-i18n-label="navMain">
+      <a href="../index.html#journey" data-nav="home" data-section="journey" data-i18n="navJourney">Journey</a>
+      <a href="experiments.html" data-nav="experiments" data-i18n="navExperiments">Experiments</a>
+      <a href="lab.html" data-nav="lab" data-i18n="navLab">Lab</a>
+      <a href="about.html" data-nav="about" data-i18n="navAbout" aria-current="page">About</a>
+    </nav>
+    <div class="bar-tools">
+      <a class="btn btn-sm btn-ink present-btn" href="present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span class="lbl" data-i18n="present">Present</span></a>
+      <button type="button" class="icon-btn" data-theme-btn></button>
+      <div class="seg" role="group" aria-label="Language" data-i18n-label="language">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
+        <button type="button" data-lang="sq" aria-pressed="false" lang="sq" title="Shqip">SQ</button>
+      </div>
+      <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" data-i18n-label="menu"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <a href="../index.html#journey" data-nav="home" data-section="journey"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-compass"/></svg><span data-i18n="navJourney">Journey</span></a>
+  <a href="experiments.html" data-nav="experiments"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-tubes"/></svg><span data-i18n="navExperiments">Experiments</span></a>
+  <a href="lab.html" data-nav="lab"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-beaker"/></svg><span data-i18n="navLab">Lab</span></a>
+  <a href="about.html" data-nav="about" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><span data-i18n="navAbout">About</span></a>
+  <a href="present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span data-i18n="presentMode">Presentation mode</span></a>
+</div>
+
+<main id="main">
+<!-- ================= ABOUT ================= -->
+<section class="about" aria-labelledby="about-title">
+  <div class="page-head about-hero">
+    <div class="container">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="aboutKicker">About</span></span>
+      <h1 class="display" id="about-title" data-i18n-html="aboutTitle">About ChemLab Explorer</h1>
+      <p class="lead" data-i18n="aboutLead"></p>
+    </div>
+  </div>
+  <div class="edge-band band-about" data-band="about-edge"></div>
+  <div class="about-body">
+    <div class="container">
+
+      <h2 class="about-h" data-i18n="aboutUseTitle">How to use it in class</h2>
+      <ol class="use-grid">
+        <li class="card"><span class="use-n">1</span><h3 data-i18n="aboutUse1T"></h3><p data-i18n="aboutUse1"></p></li>
+        <li class="card"><span class="use-n">2</span><h3 data-i18n="aboutUse2T"></h3><p data-i18n="aboutUse2"></p></li>
+        <li class="card"><span class="use-n">3</span><h3 data-i18n="aboutUse3T"></h3><p data-i18n="aboutUse3"></p></li>
+        <li class="card"><span class="use-n">4</span><h3 data-i18n="aboutUse4T"></h3><p data-i18n="aboutUse4"></p></li>
+      </ol>
+
+      <div class="about-2">
+        <section class="card" aria-labelledby="keys-title">
+          <h2 class="about-h2" id="keys-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span data-i18n="aboutKeysTitle">Presentation keys</span></h2>
+          <p class="hint" data-i18n="aboutKeysLead"></p>
+          <ul class="keys-list">
+            <li><span class="keys"><kbd>→</kbd><kbd>Space</kbd></span><span data-i18n="nextSlide"></span></li>
+            <li><span class="keys"><kbd>←</kbd></span><span data-i18n="prevSlide"></span></li>
+            <li><span class="keys"><kbd>Enter</kbd></span><span data-i18n="whnReveal"></span></li>
+            <li><span class="keys"><kbd>1–4</kbd><kbd>A–D</kbd></span><span data-i18n="keyChoose"></span></li>
+            <li><span class="keys"><kbd>F</kbd></span><span data-i18n="pvFull"></span></li>
+            <li><span class="keys"><kbd>T</kbd></span><span data-i18n="pvTheme"></span></li>
+            <li><span class="keys"><kbd>L</kbd></span><span data-i18n="language"></span></li>
+            <li><span class="keys"><kbd>G</kbd></span><span data-i18n="pvAllSlides"></span></li>
+            <li><span class="keys"><kbd>B</kbd></span><span data-i18n="keyBlack"></span></li>
+            <li><span class="keys"><kbd>Home</kbd><kbd>End</kbd></span><span data-i18n="keyStart"></span></li>
+            <li><span class="keys"><kbd>Esc</kbd></span><span data-i18n="pvExit"></span></li>
+          </ul>
+          <a class="btn btn-ink" href="present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span data-i18n="presentMode">Presentation mode</span></a>
+        </section>
+
+        <section class="card" aria-labelledby="safety-title">
+          <h2 class="about-h2" id="safety-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><span data-i18n="aboutSafetyTitle">Safety first</span></h2>
+          <p class="safety-note"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><span data-i18n="safetyStrip"></span></p>
+          <p data-i18n="teacherNote"></p>
+          <h3 class="about-h3" data-i18n="aboutSupTitle">Supervision levels</h3>
+          <ul class="sup-list">
+            <li><span class="sup-dot sup-supervised" aria-hidden="true"></span><div><b data-i18n="sup_supervised"></b><p data-i18n="supd_supervised"></p></div></li>
+            <li><span class="sup-dot sup-close" aria-hidden="true"></span><div><b data-i18n="sup_close"></b><p data-i18n="supd_close"></p></div></li>
+            <li><span class="sup-dot sup-demo" aria-hidden="true"></span><div><b data-i18n="sup_demo"></b><p data-i18n="supd_demo"></p></div></li>
+          </ul>
+          <h3 class="about-h3" data-i18n="emergencyTitle">If something goes wrong</h3>
+          <ul class="emergency-list" id="emergency-list"></ul>
+          <p><a href="https://science.cleapss.org.uk/Resource-Info/Student-Safety-Sheets.aspx" target="_blank" rel="noopener noreferrer" data-i18n="cleapssLink">CLEAPSS Student Safety Sheets</a></p>
+        </section>
+      </div>
+
+      <div class="about-2">
+        <section class="card" aria-labelledby="src-title">
+          <h2 class="about-h2" id="src-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-book"/></svg><span data-i18n="aboutSourcesTitle">Sources and credits</span></h2>
+          <p data-i18n="footerNote"></p>
+          <p data-i18n="aboutCredits"></p>
+        </section>
+        <section class="card" aria-labelledby="off-title">
+          <h2 class="about-h2" id="off-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg><span data-i18n="aboutOfflineTitle">Works without internet</span></h2>
+          <p data-i18n="aboutOffline"></p>
+          <p data-i18n="aboutVideosNote"></p>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<div class="edge-band band-footer" data-band="foot-edge"></div>
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div><h3 class="foot-brand">ChemLab <i>Explorer</i></h3><p data-i18n="footAbout"></p>
+        <p class="safety-note"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><span data-i18n="safetyStrip"></span></p></div>
+      <div><h3 data-i18n="footExplore">Explore</h3><ul>
+        <li><a href="../index.html#journey" data-nav="home" data-section="journey" data-i18n="navJourney">Journey</a></li>
+        <li><a href="experiments.html" data-nav="experiments" data-i18n="navExperiments">Experiments</a></li>
+        <li><a href="lab.html" data-nav="lab" data-i18n="navLab">Lab</a></li>
+        <li><a href="present.html" data-present="0" data-i18n="presentMode">Presentation mode</a></li>
+        <li><a href="about.html" data-nav="about" data-i18n="navAbout">About</a></li></ul></div>
+      <div><h3 data-i18n="footTeachers">For teachers</h3><p data-i18n="teacherNote"></p><p data-i18n="footerNote"></p>
+        <p><a href="https://science.cleapss.org.uk/Resource-Info/Student-Safety-Sheets.aspx" target="_blank" rel="noopener noreferrer" data-i18n="cleapssLink">CLEAPSS Student Safety Sheets</a></p></div>
+    </div>
+    <div class="foot-bottom"><span data-i18n="footBottom"></span><span data-i18n="footKeys"></span></div>
+  </div>
+</footer>
+
+<div class="wipe" id="wipe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="toast" id="toast" role="status"></div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<noscript><p class="noscript-msg">ChemLab Explorer needs JavaScript. Please allow JavaScript, or open this page in a modern browser (Chrome, Edge, Firefox or Safari).</p></noscript>
+
+<!-- ================= SCRIPTS (data first, then the parts this page uses) ================= -->
+<script src="../js/data/ui-text.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/artwork.js"></script>
+<script src="../js/about.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

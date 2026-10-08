@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mixing Lab · ChemLab Explorer</title>
+<meta name="description" content="The Mixing Lab: put substances into the cup and watch the reaction — 24 reactions to discover and 10 challenges.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f4f6f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../images/icons/favicon.svg" type="image/svg+xml">
+<!-- sets the theme and language before the page is drawn -->
+<script src="../js/boot.js"></script>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
+</head>
+<body data-page="lab" data-root="../" data-title-key="navLab">
+<!-- the icon set (images/icons/) is put into the page here -->
+<script src="../js/icons.js"></script>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<!-- ================= APP BAR ================= -->
+<header class="appbar">
+  <div class="container">
+    <a class="brand" href="../index.html" data-nav="home" aria-label="ChemLab Explorer">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#i-brand"/></svg>
+      <span class="brand-name">ChemLab <i>Explorer</i></span>
+    </a>
+    <nav class="nav" aria-label="Main" data-i18n-label="navMain">
+      <a href="../index.html#journey" data-nav="home" data-section="journey" data-i18n="navJourney">Journey</a>
+      <a href="experiments.html" data-nav="experiments" data-i18n="navExperiments">Experiments</a>
+      <a href="lab.html" data-nav="lab" data-i18n="navLab" aria-current="page">Lab</a>
+      <a href="about.html" data-nav="about" data-i18n="navAbout">About</a>
+    </nav>
+    <div class="bar-tools">
+      <a class="btn btn-sm btn-ink present-btn" href="present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span class="lbl" data-i18n="present">Present</span></a>
+      <button type="button" class="icon-btn" data-theme-btn></button>
+      <div class="seg" role="group" aria-label="Language" data-i18n-label="language">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
+        <button type="button" data-lang="sq" aria-pressed="false" lang="sq" title="Shqip">SQ</button>
+      </div>
+      <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" data-i18n-label="menu"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <a href="../index.html#journey" data-nav="home" data-section="journey"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-compass"/></svg><span data-i18n="navJourney">Journey</span></a>
+  <a href="experiments.html" data-nav="experiments"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-tubes"/></svg><span data-i18n="navExperiments">Experiments</span></a>
+  <a href="lab.html" data-nav="lab" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-beaker"/></svg><span data-i18n="navLab">Lab</span></a>
+  <a href="about.html" data-nav="about"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><span data-i18n="navAbout">About</span></a>
+  <a href="present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span data-i18n="presentMode">Presentation mode</span></a>
+</div>
+
+<main id="main">
+<!-- ================= MIXING LAB ================= -->
+<section class="lab" id="lab" aria-labelledby="lab-title">
+  <div class="page-head lab-hero">
+    <div class="container lab-head">
+      <div><span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="labKicker">The game</span></span>
+        <h1 class="display" id="lab-title" data-i18n-html="labTitle">Mixing Lab</h1>
+        <p class="lead" data-i18n="labLead"></p></div>
+      <div class="mode-tabs" role="group" data-i18n-label="labMode">
+        <button type="button" data-mode="free" aria-pressed="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-flask"/></svg><span data-i18n="freeLab">Free lab</span></button>
+        <button type="button" data-mode="challenge" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg><span data-i18n="challenges">Challenges</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="edge-band band-lab" data-band="lab-edge"></div>
+  <div class="lab-body">
+    <div class="container">
+      <div id="lab-stage">
+        <div class="lab-ring-wrap">
+          <div class="lab-ring" id="lab-ring" role="group" data-i18n-label="ringLabel">
+            <div class="lab-cup"><canvas id="lab-canvas" role="img" data-i18n-label="cupLabel"></canvas></div>
+            <div id="lab-temp" aria-live="polite"></div>
+            <div id="lab-tokens"></div>
+          </div>
+          <div class="shelf-row"><div class="seg" id="shelf-seg" role="group" data-i18n-label="shelfLabel">
+            <button type="button" data-shelf="kitchen" aria-pressed="true" data-i18n="shelfKitchen">Kitchen</button>
+            <button type="button" data-shelf="lab" aria-pressed="false" data-i18n="shelfLab">Lab</button>
+          </div></div>
+        </div>
+        <div class="lab-panel" id="lab-panel"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<div class="edge-band band-footer" data-band="foot-edge"></div>
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div><h3 class="foot-brand">ChemLab <i>Explorer</i></h3><p data-i18n="footAbout"></p>
+        <p class="safety-note"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><span data-i18n="safetyStrip"></span></p></div>
+      <div><h3 data-i18n="footExplore">Explore</h3><ul>
+        <li><a href="../index.html#journey" data-nav="home" data-section="journey" data-i18n="navJourney">Journey</a></li>
+        <li><a href="experiments.html" data-nav="experiments" data-i18n="navExperiments">Experiments</a></li>
+        <li><a href="lab.html" data-nav="lab" data-i18n="navLab">Lab</a></li>
+        <li><a href="present.html" data-present="0" data-i18n="presentMode">Presentation mode</a></li>
+        <li><a href="about.html" data-nav="about" data-i18n="navAbout">About</a></li></ul></div>
+      <div><h3 data-i18n="footTeachers">For teachers</h3><p data-i18n="teacherNote"></p><p data-i18n="footerNote"></p>
+        <p><a href="https://science.cleapss.org.uk/Resource-Info/Student-Safety-Sheets.aspx" target="_blank" rel="noopener noreferrer" data-i18n="cleapssLink">CLEAPSS Student Safety Sheets</a></p></div>
+    </div>
+    <div class="foot-bottom"><span data-i18n="footBottom"></span><span data-i18n="footKeys"></span></div>
+  </div>
+</footer>
+
+<div class="wipe" id="wipe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="toast" id="toast" role="status"></div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<noscript><p class="noscript-msg">ChemLab Explorer needs JavaScript. Please allow JavaScript, or open this page in a modern browser (Chrome, Edge, Firefox or Safari).</p></noscript>
+
+<!-- ================= SCRIPTS (data first, then the parts this page uses) ================= -->
+<script src="../js/data/ui-text.js"></script>
+<script src="../js/data/lab-chemistry.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/artwork.js"></script>
+<script src="../js/reactor.js"></script>
+<script src="../js/lab.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

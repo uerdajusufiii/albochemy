@@ -1,0 +1,50 @@
+/* ChemLab Explorer — library.css
+   Experiments page: the library with filters, search and experiment cards. */
+
+/* the page heading sits on paper, then a wave band leads into the library itself */
+.library{position:relative}
+.lib-hero{background:var(--paper)}
+.lib-body{background:var(--paper-2);padding:clamp(4px,1.5vw,16px) 0 clamp(60px,8vw,100px)}
+.lib-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--sp-6)}
+.lib-head h1{font-size:var(--fs-4xl);margin:var(--sp-4) 0 var(--sp-3)}
+.lib-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-3) var(--sp-5);margin-top:var(--sp-8)}
+.search{position:relative;flex:1 1 280px;max-width:420px}
+.search .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-3);width:20px;height:20px;pointer-events:none}
+.search input{width:100%;min-height:50px;padding:0 16px 0 46px;border:0;border-radius:var(--r-pill);background:var(--card);box-shadow:inset 0 0 0 1.5px var(--line-2),0 2px 0 var(--edge);font-size:var(--fs-md)}
+.search input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--focus),0 2px 0 var(--edge)}
+.filter{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;max-width:100%}
+.filter .seg{max-width:100%;overflow-x:auto;scrollbar-width:none}
+.filter .seg::-webkit-scrollbar{display:none}
+.filter .seg button{flex:0 0 auto}
+.filter-lbl{font-size:var(--fs-xs);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.lib-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--sp-4)}
+.lib-count{margin-top:var(--sp-5);font-weight:700;color:var(--ink-2);font-size:var(--fs-sm)}
+.xgrid{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:var(--sp-5);margin-top:var(--sp-4)}
+.xcard{position:relative;display:flex;flex-direction:column;height:100%;border-radius:var(--r-xl);background:var(--card);color:var(--ink);text-decoration:none;overflow:hidden;
+  box-shadow:var(--sh-1),inset 0 0 0 1px var(--line);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.xcard:hover,.xcard:focus-visible{transform:translateY(-6px) rotate(-.4deg);box-shadow:var(--sh-2),inset 0 0 0 1.5px var(--turq-line)}
+.xc-art{position:relative;aspect-ratio:6/5;background:color-mix(in srgb,var(--topic) 13%,var(--card));overflow:hidden}
+.xc-art::before{content:"";position:absolute;left:-10%;right:-10%;bottom:-6%;height:30%;border-radius:50% 50% 0 0/50% 50% 0 0;background:color-mix(in srgb,var(--topic) 24%,var(--card))}
+.xc-art svg{position:relative;width:100%;height:100%;padding:6% 8% 0}
+.xc-badges{position:absolute;left:10px;top:10px;right:10px;display:flex;justify-content:space-between;gap:6px;z-index:1}
+.xc-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:var(--r-pill);background:var(--card);color:var(--ink);font-size:11px;font-weight:800;box-shadow:0 1px 0 var(--edge)}
+.xc-badge .ic{width:12px;height:12px}
+.xc-badge.vid{background:var(--ink);color:var(--paper)}
+.xc-badge.vid .ic{fill:currentColor;stroke:currentColor;stroke-width:2.6}
+.xc-body{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
+.xc-topic{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--topic)}
+.xc-topic .ic{width:14px;height:14px}
+.xc-name{font-family:var(--display);font-size:1.2rem;font-weight:700;line-height:1.15}
+.xc-short{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.4;margin:0}
+.xc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:auto;padding-top:8px;font-size:var(--fs-xs);font-weight:700;color:var(--ink-2)}
+.lv-dots{display:inline-flex;gap:3px;align-items:center}
+.lv-dots i{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.lv-dots i.on{background:var(--topic,var(--ink))}
+.sup-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.sup-supervised{background:var(--sup-supervised)}
+.sup-close{background:var(--sup-close)}
+.sup-demo{background:var(--sup-demo)}
+.lib-more{display:flex;justify-content:center;margin-top:var(--sp-8)}
+.lib-empty{grid-column:1/-1;padding:var(--sp-10);text-align:center;border-radius:var(--r-xl);background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.lib-legend{display:flex;flex-wrap:wrap;gap:var(--sp-5);margin-top:var(--sp-6);font-size:var(--fs-xs);color:var(--ink-2);font-weight:600}
+.lib-legend span{display:inline-flex;align-items:center;gap:6px}

@@ -1,0 +1,122 @@
+/* ChemLab Explorer — variables.css
+   Design tokens: fonts, sizes, spacing, colours and shadows for the light theme, then the dark theme. */
+
+:root{
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --display:"Lora",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+  --fs-xs:.78rem; --fs-sm:.9rem; --fs-md:1.02rem; --fs-lg:1.15rem; --fs-xl:1.3rem; --fs-2xl:1.6rem;
+  --fs-3xl:clamp(1.85rem,1.2rem + 2.2vw,2.75rem); --fs-4xl:clamp(2.4rem,1.3rem + 4.2vw,4.6rem);
+  --fs-hero:clamp(3rem,1.1rem + 7.2vw,7.4rem);
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-20:80px; --sp-24:96px;
+  --r-sm:8px; --r-md:12px; --r-lg:18px; --r-xl:26px; --r-pill:999px;
+  --bar-h:68px; --bar-top:calc(var(--bar-h) + env(safe-area-inset-top,0px));
+  --edge-h:clamp(40px,6vw,86px);           /* height of the wave bands between sections */
+  --ease:cubic-bezier(.2,.8,.2,1); --ease-back:cubic-bezier(.3,1.4,.5,1);
+
+  /* Palette: dark blue, soft grey and white, with turquoise as the accent.
+     Green / red / amber are kept only for right answers, wrong answers and safety. */
+
+  /* surfaces & text */
+  --paper:#f4f6f9; --paper-2:#eaeef3; --paper-3:#dce3eb; --card:#ffffff; --card-2:#f6f8fb;
+  --ink:#0f2440; --ink-2:#3b4f66; --ink-3:#5a6b7f;
+  --line:rgba(15,36,64,.12); --line-2:rgba(15,36,64,.22);
+  --on-light:#0f2440;                                   /* text on pale chips, in both themes */
+
+  /* dark blue (main buttons, selected states) */
+  --brand:#163a63; --brand-hover:#1f4b7d; --brand-ink:#0b6f78; --brand-edge:#0b2342; --on-brand:#ffffff;
+
+  /* turquoise accent */
+  --turq:#14a3a6; --turq-strong:#0b7f86; --turq-ink:#0b6f78; --turq-soft:#e0f3f3; --turq-line:#9fd8d6; --on-turq:#ffffff;
+  --focus:#0b7f86;
+
+  /* artwork colours (the paper-cut illustrations), all from the same family */
+  --coral:#14a3a6; --tangerine:#5b86b8; --sun:#cfe8ea; --disc:#d3ebec; --lime:#8fcfca; --mint:#3fb5b0; --teal:#0f7f86;
+  --sky:#7ea8d3; --cobalt:#1f4f82; --violet:#3d5a85; --magenta:#1f6aa5; --rose:#c9d7e6; --copper:#a86c42; --night:#0b1a2e;
+
+  /* feedback: right / wrong / caution — kept clearly different from the palette */
+  --ok:#1b7a43; --ok-soft:#e3f3e9; --ok-line:#9ccfb0;
+  --bad:#b4233a; --bad-soft:#fbe8eb; --bad-line:#eaa7b2;
+  --warn:#8a5300; --warn-soft:#fdf3dc; --warn-line:#e6c068;
+  --danger:#b4233a;
+  --sup-supervised:#1b7a43; --sup-close:#a35400; --sup-demo:#b4233a;
+
+  /* shadows */
+  --edge:rgba(15,36,64,.16);
+  --sh-1:0 1px 0 rgba(15,36,64,.05),0 3px 8px -3px rgba(15,36,64,.18);
+  --sh-2:0 2px 0 rgba(15,36,64,.04),0 16px 30px -16px rgba(15,36,64,.35);
+  --sh-3:0 34px 70px -28px rgba(10,25,45,.45);
+  --paper-shadow:drop-shadow(0 6px 5px rgba(15,36,64,.16));
+  --paper-shadow-lg:drop-shadow(0 14px 12px rgba(15,36,64,.2));
+  --grain:.03; --s1bg:#e7edf4; --art-white:#ffffff; --art-edge:#d3dce7;
+
+  /* aliases used by the demo drawings and older components */
+  --surface:var(--card); --surface-2:var(--card-2); --surface-3:var(--paper-2);
+  --text:var(--ink); --text-2:var(--ink-2); --text-3:var(--ink-3);
+  --border:var(--line); --border-2:var(--line-2);
+  --glass:#8a97a8; --glass-fill:rgba(255,255,255,.4); --water:#d6e8f7;
+  --accent:var(--acc-l,#0b6f78); --on-accent:#ffffff; --on-topic:#ffffff;
+  color-scheme:light;
+}
+/* Dark theme: chosen with the theme button (data-theme="dark") ... */
+:root[data-theme="dark"]{
+  --paper:#0c1626; --paper-2:#101d31; --paper-3:#18283f; --card:#14223a; --card-2:#1a2b46;
+  --ink:#eef3f8; --ink-2:#c2cedc; --ink-3:#94a5b8;
+  --line:rgba(238,243,248,.12); --line-2:rgba(238,243,248,.24);
+  --brand:#3ab3b0; --brand-hover:#57c4c1; --brand-ink:#6fd6d3; --brand-edge:#1d6f70; --on-brand:#0b1626;
+  --turq:#3ab7b4; --turq-strong:#3ab3b0; --turq-ink:#6fd6d3; --turq-soft:rgba(58,183,180,.16); --turq-line:rgba(58,183,180,.45); --on-turq:#0b1626;
+  --focus:#7fdcd8;
+  --coral:#3ab7b4; --tangerine:#6f9bd0; --sun:#bfe1e4; --disc:#16304e; --lime:#6cc2bd; --mint:#4fc3be; --teal:#2fb0b3;
+  --sky:#6f9fd2; --cobalt:#5a8cc8; --violet:#7090c2; --magenta:#5a9fd8; --rose:#33507a; --copper:#c88a5a; --night:#071120;
+  --ok:#5cc98a; --ok-soft:rgba(92,201,138,.14); --ok-line:rgba(92,201,138,.45);
+  --bad:#ff8b98; --bad-soft:rgba(255,139,152,.14); --bad-line:rgba(255,139,152,.45);
+  --warn:#f0c060; --warn-soft:rgba(240,192,96,.14); --warn-line:rgba(240,192,96,.42);
+  --danger:#ff8b98;
+  --sup-supervised:#5cc98a; --sup-close:#f0b05a; --sup-demo:#ff8b98;
+  --edge:rgba(0,0,0,.55);
+  --sh-1:0 1px 0 rgba(0,0,0,.35),0 3px 8px -3px rgba(0,0,0,.6);
+  --sh-2:inset 0 1px 0 rgba(255,255,255,.04),0 18px 34px -16px rgba(0,0,0,.8);
+  --sh-3:0 40px 80px -30px rgba(0,0,0,.9);
+  --paper-shadow:drop-shadow(0 6px 6px rgba(0,0,0,.45));
+  --paper-shadow-lg:drop-shadow(0 14px 14px rgba(0,0,0,.5));
+  --grain:.05; --s1bg:#13213a; --art-white:#dde6f0; --art-edge:#7e8fa6;
+  --glass:#7d8aa0; --glass-fill:rgba(255,255,255,.06); --water:#23476b;
+  --accent:var(--acc-d,#6fd6d3); --on-accent:#0b1626; --on-topic:#0b1626;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] .tp{--topic:var(--tcd)}
+:root[data-theme="dark"] .scene{--s-bg:var(--s-bg-d)}
+:root[data-theme="dark"] .edge-band{--edge-from:var(--from-d,var(--from-l));--edge-to:var(--to-d,var(--to-l))}
+
+/* ... or following the device setting, unless light was chosen */
+@media (prefers-color-scheme:dark){
+:root:not([data-theme="light"]){
+  --paper:#0c1626; --paper-2:#101d31; --paper-3:#18283f; --card:#14223a; --card-2:#1a2b46;
+  --ink:#eef3f8; --ink-2:#c2cedc; --ink-3:#94a5b8;
+  --line:rgba(238,243,248,.12); --line-2:rgba(238,243,248,.24);
+  --brand:#3ab3b0; --brand-hover:#57c4c1; --brand-ink:#6fd6d3; --brand-edge:#1d6f70; --on-brand:#0b1626;
+  --turq:#3ab7b4; --turq-strong:#3ab3b0; --turq-ink:#6fd6d3; --turq-soft:rgba(58,183,180,.16); --turq-line:rgba(58,183,180,.45); --on-turq:#0b1626;
+  --focus:#7fdcd8;
+  --coral:#3ab7b4; --tangerine:#6f9bd0; --sun:#bfe1e4; --disc:#16304e; --lime:#6cc2bd; --mint:#4fc3be; --teal:#2fb0b3;
+  --sky:#6f9fd2; --cobalt:#5a8cc8; --violet:#7090c2; --magenta:#5a9fd8; --rose:#33507a; --copper:#c88a5a; --night:#071120;
+  --ok:#5cc98a; --ok-soft:rgba(92,201,138,.14); --ok-line:rgba(92,201,138,.45);
+  --bad:#ff8b98; --bad-soft:rgba(255,139,152,.14); --bad-line:rgba(255,139,152,.45);
+  --warn:#f0c060; --warn-soft:rgba(240,192,96,.14); --warn-line:rgba(240,192,96,.42);
+  --danger:#ff8b98;
+  --sup-supervised:#5cc98a; --sup-close:#f0b05a; --sup-demo:#ff8b98;
+  --edge:rgba(0,0,0,.55);
+  --sh-1:0 1px 0 rgba(0,0,0,.35),0 3px 8px -3px rgba(0,0,0,.6);
+  --sh-2:inset 0 1px 0 rgba(255,255,255,.04),0 18px 34px -16px rgba(0,0,0,.8);
+  --sh-3:0 40px 80px -30px rgba(0,0,0,.9);
+  --paper-shadow:drop-shadow(0 6px 6px rgba(0,0,0,.45));
+  --paper-shadow-lg:drop-shadow(0 14px 14px rgba(0,0,0,.5));
+  --grain:.05; --s1bg:#13213a; --art-white:#dde6f0; --art-edge:#7e8fa6;
+  --glass:#7d8aa0; --glass-fill:rgba(255,255,255,.06); --water:#23476b;
+  --accent:var(--acc-d,#6fd6d3); --on-accent:#0b1626; --on-topic:#0b1626;
+  color-scheme:dark;
+}
+:root:not([data-theme="light"]) .tp{--topic:var(--tcd)}
+:root:not([data-theme="light"]) .scene{--s-bg:var(--s-bg-d)}
+:root:not([data-theme="light"]) .edge-band{--edge-from:var(--from-d,var(--from-l));--edge-to:var(--to-d,var(--to-l))}
+}
+.tp{--topic:var(--tc)}

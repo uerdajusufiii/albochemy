@@ -1,0 +1,120 @@
+"use strict";
+/* =========================================================================
+   THE MIXING LAB — substances, reactions and challenges.
+   ph: negative = acid (−1 strong), positive = alkali (+1 strong).
+   ind: an indicator whose colour depends on the pH in the cup.
+   fx: what the animation shows (fizz, foam, precip, curds, coat, dissolve,
+       color, oil, emulsify, heat).
+   ========================================================================= */
+const LAB = {
+  shelves: {
+    kitchen: ["vinegar", "lemon", "soda", "cabbage", "soap", "yeast", "peroxide", "milk", "oil", "water"],
+    lab: ["hcl", "naoh", "uni", "phph", "cuso4", "nail", "mg", "agno3", "nacl", "ki", "starch", "iodine"]
+  },
+  subs: {
+    water:    { kind: "liquid", c: "#bfe0ff", a: 0.22, f: "H₂O", en: { n: "Water" }, sq: { n: "Ujë" } },
+    vinegar:  { kind: "liquid", c: "#f4ead0", a: 0.3, ph: -0.5, f: "CH₃COOH", en: { n: "Vinegar" }, sq: { n: "Uthull" } },
+    lemon:    { kind: "liquid", c: "#f7e17a", a: 0.5, ph: -0.6, f: "citric acid", en: { n: "Lemon juice" }, sq: { n: "Lëng limoni" } },
+    soda:     { kind: "powder", c: "#ffffff", a: 0.25, ph: 0.35, f: "NaHCO₃", en: { n: "Baking soda" }, sq: { n: "Sodë buke" } },
+    cabbage:  { kind: "liquid", c: "#6a3a9e", a: 0.9, ind: "cabbage", f: "anthocyanin", en: { n: "Red cabbage juice" }, sq: { n: "Lëng lakre të kuqe" } },
+    soap:     { kind: "liquid", c: "#6fd27f", a: 0.55, ph: 0.05, f: "detergent", en: { n: "Washing-up liquid" }, sq: { n: "Detergjent enësh" } },
+    yeast:    { kind: "powder", c: "#c9a46b", a: 0.4, f: "catalase", en: { n: "Yeast" }, sq: { n: "Maja" } },
+    peroxide: { kind: "liquid", c: "#e8f4ff", a: 0.2, f: "H₂O₂ 3%", en: { n: "Hydrogen peroxide (3%)" }, sq: { n: "Peroksid hidrogjeni (3%)" } },
+    milk:     { kind: "liquid", c: "#fbf8f0", a: 0.96, ph: -0.05, f: "casein", en: { n: "Milk" }, sq: { n: "Qumësht" } },
+    oil:      { kind: "liquid", c: "#f2c230", a: 0.75, f: "oil", en: { n: "Cooking oil" }, sq: { n: "Vaj gatimi" } },
+    hcl:      { kind: "liquid", c: "#eef6ff", a: 0.2, ph: -1, f: "HCl", teacher: true, en: { n: "Hydrochloric acid (dilute)" }, sq: { n: "Acid klorhidrik (i holluar)" } },
+    naoh:     { kind: "liquid", c: "#f3f6ff", a: 0.2, ph: 1, f: "NaOH", teacher: true, en: { n: "Sodium hydroxide (dilute)" }, sq: { n: "Hidroksid natriumi (i holluar)" } },
+    uni:      { kind: "liquid", c: "#3fae49", a: 0.9, ind: "uni", f: "indicator", en: { n: "Universal indicator" }, sq: { n: "Indikator universal" } },
+    phph:     { kind: "liquid", c: "#f6f6f6", a: 0.15, ind: "phph", f: "indicator", en: { n: "Phenolphthalein" }, sq: { n: "Fenolftaleinë" } },
+    cuso4:    { kind: "liquid", c: "#2f7fe0", a: 0.85, f: "CuSO₄", en: { n: "Copper sulfate" }, sq: { n: "Sulfat bakri" } },
+    nail:     { kind: "metal", c: "#9aa1ad", f: "Fe", en: { n: "Iron nail" }, sq: { n: "Gozhdë hekuri" } },
+    mg:       { kind: "metal", c: "#d7dde6", f: "Mg", en: { n: "Magnesium ribbon" }, sq: { n: "Shirit magnezi" } },
+    agno3:    { kind: "liquid", c: "#f6f7fa", a: 0.15, f: "AgNO₃", teacher: true, en: { n: "Silver nitrate" }, sq: { n: "Nitrat argjendi" } },
+    nacl:     { kind: "liquid", c: "#eef5ff", a: 0.18, f: "NaCl", en: { n: "Salt water" }, sq: { n: "Ujë me kripë" } },
+    ki:       { kind: "liquid", c: "#f6f5ee", a: 0.18, f: "KI", en: { n: "Potassium iodide" }, sq: { n: "Jodur kaliumi" } },
+    starch:   { kind: "liquid", c: "#f2efe6", a: 0.5, f: "starch", en: { n: "Starch solution" }, sq: { n: "Tretësirë niseshteje" } },
+    iodine:   { kind: "liquid", c: "#a1521c", a: 0.85, f: "I₂", en: { n: "Iodine solution" }, sq: { n: "Tretësirë jodi" } }
+  },
+  aqueous: ["water", "vinegar", "lemon", "cabbage", "peroxide", "milk"],
+  indicator: {
+    cabbage: [[2, "#d81e4a"], [3.5, "#d6407f"], [5.5, "#9a48b8"], [7, "#6a3a9e"], [8.5, "#3a5fcf"], [10.5, "#1f9d6a"], [12.5, "#d8c22c"]],
+    uni: [[2, "#e0302b"], [3.5, "#f2742b"], [5.5, "#f0c02c"], [7, "#3fae49"], [8.5, "#1e9f9a"], [10.5, "#2c5fd0"], [12.5, "#6b3fa0"]]
+  },
+  rules: [
+    { id: "r-co2-vin", needs: ["vinegar", "soda"], fx: [{ t: "fizz", p: 0.95, d: 5 }, { t: "heat", v: -3 }],
+      en: { n: "Acid meets carbonate", o: "Fizzing! Bubbles of carbon dioxide gas rush out.", eq: "NaHCO₃ + CH₃COOH → CH₃COONa + H₂O + CO₂", w: "An acid reacts with a carbonate to make a salt, water and carbon dioxide gas. The mixture even cools a little." },
+      sq: { n: "Acidi takon karbonatin", o: "Shkumë! Flluska dioksidi karboni dalin me vrull.", eq: "NaHCO₃ + CH₃COOH → CH₃COONa + H₂O + CO₂", w: "Një acid reagon me një karbonat dhe jep kripë, ujë dhe gaz dioksid karboni. Përzierja madje ftohet pak." } },
+    { id: "r-co2-lem", needs: ["lemon", "soda"], fx: [{ t: "fizz", p: 0.85, d: 5 }, { t: "heat", v: -3 }],
+      en: { n: "Lemon fizz", o: "Lots of bubbles — carbon dioxide again!", eq: "citric acid + sodium hydrogencarbonate → sodium citrate + water + carbon dioxide", w: "Lemon juice contains citric acid. Like every acid, it reacts with carbonates to release carbon dioxide." },
+      sq: { n: "Shkumë limoni", o: "Shumë flluska — sërish dioksid karboni!", eq: "acid citrik + hidrogjenkarbonat natriumi → citrat natriumi + ujë + dioksid karboni", w: "Lëngu i limonit përmban acid citrik. Si çdo acid, reagon me karbonatet dhe çliron dioksid karboni." } },
+    { id: "r-o2-yeast", needs: ["peroxide", "yeast"], fx: [{ t: "fizz", p: 0.8, d: 6 }, { t: "foam", a: 0.28, c: "#fff8ec" }, { t: "heat", v: 4 }],
+      en: { n: "Catalyst at work", o: "Oxygen bubbles stream out and a little foam forms.", eq: "2H₂O₂ → 2H₂O + O₂", w: "Yeast contains catalase, an enzyme that splits hydrogen peroxide into water and oxygen very quickly. The yeast is not used up — it is a catalyst." },
+      sq: { n: "Katalizatori në punë", o: "Dalin flluska oksigjeni dhe formohet pak shkumë.", eq: "2H₂O₂ → 2H₂O + O₂", w: "Majaja përmban katalazë, një enzimë që e ndan peroksidin e hidrogjenit në ujë dhe oksigjen shumë shpejt. Majaja nuk harxhohet — është katalizator." } },
+    { id: "r-elephant", needs: ["peroxide", "yeast", "soap"], supersedes: "r-o2-yeast", fx: [{ t: "foam", a: 1, c: "#fffdf7", s: "#6fd27f", over: true }, { t: "fizz", p: 0.6, d: 4 }, { t: "heat", v: 6 }],
+      en: { n: "Elephant's toothpaste", o: "A giant foam eruption pours out of the cup!", eq: "2H₂O₂ → 2H₂O + O₂ (catalysed by catalase)", w: "The catalase makes oxygen incredibly fast, and the washing-up liquid traps it in millions of tiny bubbles. The foam feels warm: the reaction is exothermic." },
+      sq: { n: "Pasta e dhëmbëve e elefantit", o: "Një shpërthim gjigant shkume derdhet nga gota!", eq: "2H₂O₂ → 2H₂O + O₂ (katalizuar nga katalaza)", w: "Katalaza prodhon oksigjen jashtëzakonisht shpejt dhe detergjenti e kap atë në miliona flluska të vogla. Shkuma ndihet e ngrohtë: reaksioni është ekzotermik." } },
+    { id: "r-curd-vin", needs: ["milk", "vinegar"], fx: [{ t: "curds", c: "#fffaf0" }],
+      en: { n: "Curdled milk", o: "White lumps (curds) appear in the milk.", eq: "casein (milk protein) + acid → clumps of casein", w: "Milk contains a protein called casein. Acid changes its charge, so the protein molecules stick together into curds — the first step of making cheese." },
+      sq: { n: "Qumësht i prerë", o: "Në qumësht shfaqen kokrriza të bardha (gjizë).", eq: "kazeinë (proteinë e qumështit) + acid → grumbuj kazeine", w: "Qumështi përmban një proteinë të quajtur kazeinë. Acidi ia ndryshon ngarkesën, ndaj molekulat ngjiten bashkë si gjizë — hapi i parë i bërjes së djathit." } },
+    { id: "r-curd-lem", needs: ["milk", "lemon"], fx: [{ t: "curds", c: "#fff8e1" }],
+      en: { n: "Lemon curds", o: "Lemon juice makes the milk split into lumps.", eq: "casein (milk protein) + citric acid → clumps of casein", w: "Citric acid does the same job as vinegar: it makes the milk proteins clump together." },
+      sq: { n: "Gjizë me limon", o: "Lëngu i limonit e ndan qumështin në kokrriza.", eq: "kazeinë (proteinë e qumështit) + acid citrik → grumbuj kazeine", w: "Acidi citrik bën të njëjtën punë si uthulla: i bën proteinat e qumështit të ngjiten bashkë." } },
+    { id: "r-oil", needs: ["oil", "@aq"], fx: [{ t: "oil" }],
+      en: { n: "Oil floats", o: "Two layers form — the oil floats on top.", eq: "No reaction: oil and water don't mix", w: "Oil is less dense than water, so it floats. Its molecules are non-polar and water molecules are polar, so they don't mix." },
+      sq: { n: "Vaji noton", o: "Formohen dy shtresa — vaji noton sipër.", eq: "Pa reaksion: vaji dhe uji nuk përzihen", w: "Vaji është më pak i dendur se uji, ndaj noton. Molekulat e tij janë jopolare, kurse të ujit polare, ndaj nuk përzihen." } },
+    { id: "r-emulsion", needs: ["oil", "soap"], supersedes: "r-oil", fx: [{ t: "emulsify" }],
+      en: { n: "Emulsion", o: "The layers break up into a cloudy mixture.", eq: "oil + water + detergent → emulsion", w: "Detergent molecules have one end that likes water and one end that likes oil, so they surround tiny oil droplets and spread them through the water. That's how washing-up liquid cleans greasy plates." },
+      sq: { n: "Emulsion", o: "Shtresat shpërbëhen në një përzierje të turbullt.", eq: "vaj + ujë + detergjent → emulsion", w: "Molekulat e detergjentit kanë një skaj që pëlqen ujin dhe një që pëlqen vajin, ndaj rrethojnë pikat e vogla të vajit dhe i shpërndajnë në ujë. Kështu detergjenti pastron pjatat me yndyrë." } },
+    { id: "r-cu-oh", needs: ["cuso4", "naoh"], fx: [{ t: "precip", c: "#8cc0f2", n: 1 }, { t: "color", c: "#cfe6fb", a: 0.55, slow: true }],
+      en: { n: "Blue precipitate", o: "A pale blue solid appears and slowly sinks.", eq: "CuSO₄ + 2NaOH → Cu(OH)₂ + Na₂SO₄", w: "Copper ions and hydroxide ions join to make copper hydroxide, which doesn't dissolve — so it forms a solid called a precipitate. Chemists use this to test for copper." },
+      sq: { n: "Precipitat blu", o: "Shfaqet një lëndë e ngurtë blu e zbehtë që fundoset ngadalë.", eq: "CuSO₄ + 2NaOH → Cu(OH)₂ + Na₂SO₄", w: "Jonet e bakrit dhe jonet hidrokside bashkohen në hidroksid bakri, që nuk tretet — ndaj formon një lëndë të ngurtë të quajtur precipitat. Kimistët e përdorin për të provuar praninë e bakrit." } },
+    { id: "r-cu-nail", needs: ["cuso4", "nail"], fx: [{ t: "coat", o: "nail", c: "#c26a32" }, { t: "color", c: "#8fd0b9", a: 0.7, slow: true }],
+      en: { n: "Copper coating", o: "The nail turns copper-coloured and the blue fades.", eq: "Fe + CuSO₄ → FeSO₄ + Cu", w: "Iron is more reactive than copper, so it displaces copper from the solution. Copper metal coats the nail while iron goes into solution." },
+      sq: { n: "Veshje me bakër", o: "Gozhda merr ngjyrë bakri dhe bluja zbehet.", eq: "Fe + CuSO₄ → FeSO₄ + Cu", w: "Hekuri është më aktiv se bakri, ndaj e zhvendos bakrin nga tretësira. Bakri metalik vesh gozhdën, ndërsa hekuri kalon në tretësirë." } },
+    { id: "r-cu-mg", needs: ["cuso4", "mg"], fx: [{ t: "dissolve", o: "mg" }, { t: "fizz", p: 0.35, d: 5, at: "mg" }, { t: "precip", c: "#a0522d", n: 0.5 }, { t: "color", c: "#d6ecf7", a: 0.45, slow: true }, { t: "heat", v: 9 }],
+      en: { n: "Magnesium beats copper", o: "The ribbon disappears, brown copper forms and the blue fades. It gets hot!", eq: "Mg + CuSO₄ → MgSO₄ + Cu", w: "Magnesium is much more reactive than copper, so it displaces it quickly and gives out lots of heat." },
+      sq: { n: "Magnezi mund bakrin", o: "Shiriti zhduket, formohet bakër kafe dhe bluja zbehet. Nxehet!", eq: "Mg + CuSO₄ → MgSO₄ + Cu", w: "Magnezi është shumë më aktiv se bakri, ndaj e zhvendos shpejt dhe lëshon shumë nxehtësi." } },
+    { id: "r-mg-hcl", needs: ["hcl", "mg"], fx: [{ t: "fizz", p: 1, d: 5, at: "mg" }, { t: "dissolve", o: "mg" }, { t: "heat", v: 10 }],
+      en: { n: "Hydrogen gas", o: "Vigorous fizzing — the magnesium disappears and the liquid warms up.", eq: "Mg + 2HCl → MgCl₂ + H₂", w: "Reactive metals react with acids to make a salt and hydrogen gas. A lighted splint would give a squeaky pop!" },
+      sq: { n: "Gaz hidrogjen", o: "Shkumëzim i fortë — magnezi zhduket dhe lëngu ngrohet.", eq: "Mg + 2HCl → MgCl₂ + H₂", w: "Metalet aktive reagojnë me acidet dhe japin një kripë dhe gaz hidrogjen. Një ashkël e ndezur do të bënte një 'pop' të vogël!" } },
+    { id: "r-fe-hcl", needs: ["hcl", "nail"], fx: [{ t: "fizz", p: 0.35, d: 7, at: "nail" }, { t: "color", c: "#d9efcc", a: 0.35, slow: true }],
+      en: { n: "Slow fizz on iron", o: "Small bubbles form on the nail and the liquid turns faintly green.", eq: "Fe + 2HCl → FeCl₂ + H₂", w: "Iron is less reactive than magnesium, so it fizzes much more slowly. The pale green colour comes from iron(II) ions." },
+      sq: { n: "Shkumë e ngadaltë te hekuri", o: "Në gozhdë formohen flluska të vogla dhe lëngu merr një ngjyrë të gjelbër të zbehtë.", eq: "Fe + 2HCl → FeCl₂ + H₂", w: "Hekuri është më pak aktiv se magnezi, ndaj shkumëzon shumë më ngadalë. Ngjyra e gjelbër e zbehtë vjen nga jonet e hekurit(II)." } },
+    { id: "r-neutral", needs: ["hcl", "naoh"], fx: [{ t: "heat", v: 7 }],
+      en: { n: "Neutralisation", o: "Nothing visible — but the cup gets warm!", eq: "HCl + NaOH → NaCl + H₂O", w: "The acid's H⁺ ions and the alkali's OH⁻ ions join to make water, releasing heat. Add an indicator to watch the pH change." },
+      sq: { n: "Neutralizimi", o: "Asgjë nuk duket — por gota ngrohet!", eq: "HCl + NaOH → NaCl + H₂O", w: "Jonet H⁺ të acidit dhe jonet OH⁻ të alkalit bashkohen në ujë dhe lëshojnë nxehtësi. Shto një indikator për të parë ndryshimin e pH-it." } },
+    { id: "r-agcl", needs: ["agno3", "nacl"], fx: [{ t: "precip", c: "#ffffff", n: 1 }],
+      en: { n: "White precipitate", o: "A white cloud forms instantly and settles.", eq: "AgNO₃ + NaCl → AgCl + NaNO₃", w: "Silver ions and chloride ions make silver chloride, which is insoluble. This is the classic test for chloride ions." },
+      sq: { n: "Precipitat i bardhë", o: "Një re e bardhë formohet menjëherë dhe fundoset.", eq: "AgNO₃ + NaCl → AgCl + NaNO₃", w: "Jonet e argjendit dhe jonet klorur japin klorur argjendi, që është i patretshëm. Kjo është prova klasike për jonet klorur." } },
+    { id: "r-agcl2", needs: ["agno3", "hcl"], fx: [{ t: "precip", c: "#ffffff", n: 0.9 }],
+      en: { n: "Chloride test", o: "White precipitate — hydrochloric acid contains chloride ions too.", eq: "AgNO₃ + HCl → AgCl + HNO₃", w: "Any solution with chloride ions gives white silver chloride with silver nitrate." },
+      sq: { n: "Prova e klorurit", o: "Precipitat i bardhë — edhe acidi klorhidrik përmban jone klorur.", eq: "AgNO₃ + HCl → AgCl + HNO₃", w: "Çdo tretësirë me jone klorur jep klorur argjendi të bardhë me nitratin e argjendit." } },
+    { id: "r-agi", needs: ["agno3", "ki"], fx: [{ t: "precip", c: "#f5d63d", n: 1 }],
+      en: { n: "Yellow precipitate", o: "A bright yellow solid appears.", eq: "AgNO₃ + KI → AgI + KNO₃", w: "Silver iodide is yellow and insoluble — so the colour tells chemists which halide ion was there." },
+      sq: { n: "Precipitat i verdhë", o: "Shfaqet një lëndë e ngurtë e verdhë e ndezur.", eq: "AgNO₃ + KI → AgI + KNO₃", w: "Jodur argjendi është i verdhë dhe i patretshëm — ndaj ngjyra u tregon kimistëve cili jon halogjenur ishte i pranishëm." } },
+    { id: "r-starch", needs: ["iodine", "starch"], fx: [{ t: "color", c: "#1c1f4a", a: 0.95 }],
+      en: { n: "Starch test", o: "The brown iodine turns blue-black!", eq: "iodine + starch → blue-black complex", w: "Iodine molecules slot inside the coiled starch chains, forming a blue-black complex. It's how we test foods for starch." },
+      sq: { n: "Prova e niseshtesë", o: "Jodi kafe bëhet blu e zezë!", eq: "jod + niseshte → kompleks blu i zi", w: "Molekulat e jodit futen brenda zinxhirëve spiralë të niseshtesë dhe formojnë një kompleks blu të zi. Kështu provojmë nëse ushqimet kanë niseshte." } }
+  ],
+  indicatorFinds: {
+    "ind-cabbage-acid": { en: { n: "Cabbage says: acid!", o: "The purple juice turns pink-red.", w: "Anthocyanin pigments change shape in acid and reflect red light." }, sq: { n: "Lakra thotë: acid!", o: "Lëngu vjollcë bëhet rozë i kuq.", w: "Pigmentet antocianine ndryshojnë formë në acid dhe reflektojnë dritë të kuqe." } },
+    "ind-cabbage-alk": { en: { n: "Cabbage says: alkali!", o: "The purple juice turns blue-green.", w: "In alkalis the pigment loses H⁺ ions and shifts to blue, green — even yellow at very high pH." }, sq: { n: "Lakra thotë: alkali!", o: "Lëngu vjollcë bëhet blu i gjelbër.", w: "Në alkale pigmenti humbet jone H⁺ dhe kalon në blu, të gjelbër — madje të verdhë në pH shumë të lartë." } },
+    "ind-uni-acid": { en: { n: "Universal indicator: acid", o: "Red or orange — a low pH.", w: "Universal indicator is a mixture of dyes that gives a different colour for each pH." }, sq: { n: "Indikatori universal: acid", o: "E kuqe ose portokalli — pH i ulët.", w: "Indikatori universal është një përzierje ngjyruesish që jep ngjyrë të ndryshme për çdo pH." } },
+    "ind-uni-neutral": { en: { n: "Perfectly neutral", o: "Green — pH 7. The acid and alkali cancelled out!", w: "When an acid exactly neutralises an alkali, the solution contains only a salt and water." }, sq: { n: "Krejt neutral", o: "E gjelbër — pH 7. Acidi dhe alkali u anuluan!", w: "Kur një acid neutralizon saktësisht një alkal, tretësira përmban vetëm një kripë dhe ujë." } },
+    "ind-uni-alk": { en: { n: "Universal indicator: alkali", o: "Blue or purple — a high pH.", w: "Strong alkalis like sodium hydroxide turn universal indicator dark blue or purple." }, sq: { n: "Indikatori universal: alkali", o: "Blu ose vjollcë — pH i lartë.", w: "Alkalet e forta si hidroksidi i natriumit e bëjnë indikatorin universal blu të errët ose vjollcë." } },
+    "ind-phph-pink": { en: { n: "Pink magic", o: "Colourless phenolphthalein turns bright pink.", w: "Phenolphthalein is colourless in acids and neutral water, but pink above about pH 8.5." }, sq: { n: "Magji rozë", o: "Fenolftaleina e pangjyrë bëhet rozë e ndezur.", w: "Fenolftaleina është e pangjyrë në acide dhe në ujë neutral, por bëhet rozë mbi rreth pH 8,5." } }
+  },
+  goals: [
+    { shelf: "kitchen", need: ["ind-cabbage-acid"], en: { g: "Turn the red cabbage juice pink or red.", h: "Indicators change colour in acids. Which kitchen liquids taste sour?" }, sq: { g: "Bëje lëngun e lakrës së kuqe rozë ose të kuq.", h: "Indikatorët ndryshojnë ngjyrë në acide. Cilat lëngje të kuzhinës kanë shije të thartë?" } },
+    { shelf: "kitchen", need: ["r-co2-vin", "r-co2-lem"], en: { g: "Make a gas using baking soda.", h: "Baking soda is a carbonate. Carbonates fizz with acids." }, sq: { g: "Prodho një gaz duke përdorur sodë buke.", h: "Soda e bukës është karbonat. Karbonatet shkumëzojnë me acidet." } },
+    { shelf: "kitchen", need: ["r-curd-vin", "r-curd-lem"], en: { g: "Turn milk into curds.", h: "Milk proteins clump together in acid." }, sq: { g: "Ktheje qumështin në gjizë.", h: "Proteinat e qumështit ngjiten bashkë në acid." } },
+    { shelf: "kitchen", need: ["r-oil"], en: { g: "Make two layers that won't mix.", h: "One kitchen liquid is less dense than water and doesn't dissolve in it." }, sq: { g: "Krijo dy shtresa që nuk përzihen.", h: "Një lëng i kuzhinës është më pak i dendur se uji dhe nuk tretet në të." } },
+    { shelf: "kitchen", need: ["ind-cabbage-alk"], en: { g: "Turn the red cabbage juice blue or green.", h: "Indicators turn blue-green in alkalis. Baking soda is slightly alkaline." }, sq: { g: "Bëje lëngun e lakrës së kuqe blu ose të gjelbër.", h: "Indikatorët bëhen blu të gjelbër në alkale. Soda e bukës është pak alkaline." } },
+    { shelf: "kitchen", need: ["r-elephant"], en: { g: "Create a giant foam eruption!", h: "You need three things: a liquid that releases oxygen, a catalyst, and something that traps bubbles." }, sq: { g: "Krijo një shpërthim gjigant shkume!", h: "Të duhen tri gjëra: një lëng që çliron oksigjen, një katalizator dhe diçka që kap flluskat." } },
+    { shelf: "lab", need: ["r-cu-nail"], en: { g: "Coat the iron nail with copper.", h: "A more reactive metal can push copper out of its compound." }, sq: { g: "Vishe gozhdën e hekurit me bakër.", h: "Një metal më aktiv mund ta nxjerrë bakrin nga përbërja e tij." } },
+    { shelf: "lab", need: ["r-cu-oh"], en: { g: "Make a pale blue precipitate.", h: "Copper ions + hydroxide ions make a solid that doesn't dissolve." }, sq: { g: "Krijo një precipitat blu të zbehtë.", h: "Jonet e bakrit + jonet hidrokside japin një lëndë të ngurtë që nuk tretet." } },
+    { shelf: "lab", need: ["r-mg-hcl"], en: { g: "Make hydrogen gas from a metal.", h: "Reactive metals fizz in acids." }, sq: { g: "Prodho gaz hidrogjen nga një metal.", h: "Metalet aktive shkumëzojnë në acide." } },
+    { shelf: "lab", need: ["ind-phph-pink"], en: { g: "Turn phenolphthalein pink.", h: "Phenolphthalein turns pink in alkalis." }, sq: { g: "Bëje fenolftaleinën rozë.", h: "Fenolftaleina bëhet rozë në alkale." } }
+  ]
+};
+LAB.discoveries = [...LAB.rules.map((r) => r.id), ...Object.keys(LAB.indicatorFinds)];

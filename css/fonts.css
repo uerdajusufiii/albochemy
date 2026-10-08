@@ -1,0 +1,8 @@
+/* ChemLab Explorer — fonts.css
+   The two typefaces, stored in assets/fonts/ so the site looks right without internet.
+   Inter (text) and Lora (headings) are both free under the SIL Open Font License 1.1. */
+@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/Inter-Regular.woff") format("woff")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/Inter-SemiBold.woff") format("woff")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:800;font-display:swap;src:url("../assets/fonts/Inter-ExtraBold.woff") format("woff")}
+@font-face{font-family:"Lora";font-style:normal;font-weight:400 700;font-display:swap;src:url("../assets/fonts/Lora-Variable.woff") format("woff")}
+@font-face{font-family:"Lora";font-style:italic;font-weight:400 700;font-display:swap;src:url("../assets/fonts/Lora-Italic-Variable.woff") format("woff")}

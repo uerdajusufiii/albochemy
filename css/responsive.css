@@ -1,0 +1,99 @@
+/* ChemLab Explorer — responsive.css
+   Responsive layout: every breakpoint for phones, tablets and wide screens, grouped by section. */
+
+
+/* ---------- Base: type, buttons, controls ---------- */
+@media (min-width:720px){.container{padding-left:max(var(--sp-8),env(safe-area-inset-left,0px));padding-right:max(var(--sp-8),env(safe-area-inset-right,0px))}}
+@media (min-width:1200px){.container{padding-left:var(--sp-10);padding-right:var(--sp-10)}}
+
+/* ---------- Layout: app bar, menu, footer, toast ---------- */
+@media (min-width:980px){.nav{display:flex}}
+@media (min-width:640px){.present-btn .lbl{display:inline}}
+@media (min-width:980px){.menu-btn{display:none}}
+@media (max-width:420px){.brand-name{font-size:1.05rem}.brand-mark{width:36px;height:36px}.bar-tools{gap:6px}.bar-tools .icon-btn{width:40px;height:40px}}
+@media (max-width:460px){.brand-name{display:none}}
+@media (min-width:980px){.menu{display:none}}
+@media (min-width:860px){.foot-grid{grid-template-columns:1.2fr 1fr 1fr}}
+
+/* ---------- Home: opening ---------- */
+@media (min-width:1200px){#top{--pad-x:40px}}
+/* phones and tablets: the artwork on top (the waves along its foot), the text below it.
+   (#top is the home page's opening; the presentation's title slide keeps its own layout.) */
+@media (max-width:900px){
+  #top{min-height:0;--art-h:max(420px,min(64svh,560px));--wave-h:calc(var(--art-h) * .33);
+    --fw:min(42vw,250px);--fx:calc(50% - var(--fw) / 2);--fb:calc(var(--art-h) * .07)}
+  #top .op-art{position:relative;inset:auto;height:var(--art-h);overflow:hidden}
+  #top .op-inner{min-height:0;align-items:flex-start;padding-top:8px;padding-bottom:56px}
+  #top .op-copy{max-width:640px}
+  #top .op-title{margin-top:var(--sp-4);font-size:clamp(2.6rem,1rem + 4.6vw,5.4rem)}
+  #top .ly-sun{left:50%;margin-left:min(-44vw,-260px);top:calc(var(--bar-h) + 10px);width:min(88vw,520px)}
+  #top .ly-mol{left:0;right:0;top:var(--bar-h);bottom:var(--wave-h)}
+  #top .op-flask-btn{bottom:auto;top:calc(var(--art-h) - var(--fb) - var(--fw) * 1.17)}
+  #top .op-tap{left:auto;right:5vw;top:calc(var(--bar-h) + 16px);bottom:auto}
+  #top .scroll-cue{display:none}
+}
+/* on wide screens the opening's own waves already lead into the journey */
+@media (min-width:901px){.band-intro{display:none}}
+@media (max-width:900px) and (min-width:600px){#top{--fw:min(30vw,250px)}#top .ly-sun{width:min(70vw,520px);margin-left:min(-35vw,-260px)}}
+
+/* ---------- Home: journey and scenes ---------- */
+@media (min-width:920px){.scene-grid{grid-template-columns:1.02fr 1fr}.scene.flip .scene-art{order:2}}
+/* one column: the artwork sits above the text, so it only drifts a little while scrolling */
+@media (max-width:919px){.scene{--par:-24px}.scene-art{max-width:520px}}
+
+/* ---------- Components: challenge cards, related chips ---------- */
+@media (min-width:560px){.whn-opts{grid-template-columns:1fr 1fr}}
+
+/* ---------- Experiment library ---------- */
+@media (max-width:520px){.xgrid{grid-template-columns:1fr 1fr;gap:12px}}
+@media (max-width:520px){.xc-body{padding:10px 12px 12px}.xc-name{font-size:1.02rem}.xc-short{display:none}.xc-badge{font-size:10px;padding:3px 7px}}
+
+/* ---------- Experiment page ---------- */
+@media (min-width:960px){.xp-hero-grid{grid-template-columns:1.15fr .85fr}}
+@media (max-width:959px){.xp-clip .clip{transform:none;max-width:560px;margin-inline:auto}}
+@media (min-width:720px){.result-grid{grid-template-columns:240px 1fr}}
+@media (min-width:720px){.opts{grid-template-columns:1fr 1fr}}
+@media (min-width:960px){.grid-how{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:start}}
+@media (min-width:960px){.sticky-col{position:sticky;top:calc(var(--bar-top) + 80px)}}
+@media (min-width:860px){.grid-2{grid-template-columns:1fr 1fr}}
+@media (min-width:900px){.video-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:start}}
+@media (max-width:520px){.short-wrap{grid-template-columns:1fr}}
+@media (max-width:520px){.short-frame{max-width:260px;margin-inline:auto}}
+@media (min-width:860px){.sources{grid-template-columns:1fr 1fr}}
+@media (min-width:720px){.pager{grid-template-columns:1fr 1fr}}
+
+/* ---------- Mixing Lab ---------- */
+@media (min-width:980px){#lab-stage{grid-template-columns:minmax(0,1.12fr) minmax(330px,.88fr)}}
+@media (max-width:520px){.disc-grid{grid-template-columns:repeat(8,1fr)}}
+
+/* ---------- Presentation mode ---------- */
+/* tall screens: no artwork behind the title text, only the waves along the bottom */
+@media (max-aspect-ratio:1/1){.pv-title{--copy-w:100%}.pv-title .ly-sun,.pv-title .ly-flask,.pv-title .ly-mol{display:none}}
+@media (max-aspect-ratio:1/1){.pv-scene,.pv-whn{grid-template-columns:1fr;align-content:center}.pv-scene .scene-art{max-height:34vh;max-width:56vh;margin:0 auto}}
+@media (max-aspect-ratio:1/1){.pv-spot{grid-template-columns:1fr}.pv-spot .clip{max-width:46vh}}
+@media (max-width:640px){.pv-bar .opt-hide{display:none}.pv-bar button{min-width:44px;height:44px;padding:0 9px}}
+/* phones (portrait or landscape): the slides end above the control bar, and a slide whose content
+   is taller than the screen scrolls instead of being cut off */
+@media (max-width:700px),(max-height:520px){
+  .present{font-size:clamp(14px,1.6vh + .9vw,18px)}
+  .pv-help{display:none}
+  .pv-stage{bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+  .pv-bar{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+  .pv-slide{overflow-y:auto;overscroll-behavior:contain;align-content:start;align-items:start;
+    padding:max(22px,env(safe-area-inset-top,0px)) 18px 22px}
+  .pv-title{padding-bottom:calc(var(--wave-h) + 12px)}
+  .pv-h,.pv-spot .pv-h,.pv-end .pv-h,.pv-lab-head .pv-h{font-size:clamp(1.8rem,min(8.5vw,11vh),3.6rem)}
+  .pv-whn .whn-opts{grid-template-columns:1fr}
+  .pv-lab-slot #lab-stage{grid-template-columns:1fr}
+  .pv-lab-slot .lab-ring{width:min(100%,520px)}
+  .pv-end .confetti{display:none}
+  .pv-lab-slot .lab-panel{max-height:none;overflow:visible}
+}
+@media (max-width:520px){.pv-bar{gap:4px;padding:5px;max-width:calc(100% - 16px)}.pv-bar button{min-width:40px;height:42px;padding:0 8px}.pv-count{min-width:52px;font-size:14px}.pv-reveal span{display:none}}
+/* very narrow phones: keep only back, slide number, reveal, next and exit */
+@media (max-width:420px){.pv-bar .pv-sep,.pv-bar [data-pv="theme"],.pv-bar [data-pv="full"]{display:none}}
+@media (max-height:520px){.pv-bar{padding:4px}.pv-bar button{height:40px;min-width:40px}.pv-stage{bottom:calc(62px + env(safe-area-inset-bottom,0px))}}
+
+/* ---------- About page ---------- */
+@media (min-width:900px){.about-2{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.keys-list li{grid-template-columns:1fr;gap:4px}}

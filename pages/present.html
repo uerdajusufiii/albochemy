@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presentation mode · ChemLab Explorer</title>
+<meta name="description" content="Full-screen presentation of ChemLab Explorer for a large audience, with audience challenges and a live lab.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f4f6f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../images/icons/favicon.svg" type="image/svg+xml">
+<!-- sets the theme and language before the page is drawn -->
+<script src="../js/boot.js"></script>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/demos.css">
+<link rel="stylesheet" href="../css/lab.css">
+<link rel="stylesheet" href="../css/present.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="stylesheet" href="../css/animations.css">
+</head>
+<body data-page="present" data-root="../" data-title-key="presentMode" class="presenting">
+<!-- the icon set (images/icons/) is put into the page here -->
+<script src="../js/icons.js"></script>
+
+<!-- ================= SLIDES (drawn by js/present.js) ================= -->
+<div class="present" id="present" tabindex="-1" role="region" data-i18n-label="presentMode"></div>
+
+<!-- the Mixing Lab, moved onto the "live lab" slide when it is shown -->
+<div class="lab-holder" id="lab-holder" hidden>
+  <div id="lab-stage">
+        <div class="lab-ring-wrap">
+          <div class="lab-ring" id="lab-ring" role="group" data-i18n-label="ringLabel">
+            <div class="lab-cup"><canvas id="lab-canvas" role="img" data-i18n-label="cupLabel"></canvas></div>
+            <div id="lab-temp" aria-live="polite"></div>
+            <div id="lab-tokens"></div>
+          </div>
+          <div class="shelf-row"><div class="seg" id="shelf-seg" role="group" data-i18n-label="shelfLabel">
+            <button type="button" data-shelf="kitchen" aria-pressed="true" data-i18n="shelfKitchen">Kitchen</button>
+            <button type="button" data-shelf="lab" aria-pressed="false" data-i18n="shelfLab">Lab</button>
+          </div></div>
+        </div>
+        <div class="lab-panel" id="lab-panel"></div>
+      </div>
+</div>
+
+<div class="wipe" id="wipe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="toast" id="toast" role="status"></div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<noscript><p class="noscript-msg">ChemLab Explorer needs JavaScript. Please allow JavaScript, or open this page in a modern browser (Chrome, Edge, Firefox or Safari).</p></noscript>
+
+<!-- ================= SCRIPTS (data first, then the parts this page uses) ================= -->
+<script src="../js/data/ui-text.js"></script>
+<script src="../js/data/experiments-core.js"></script>
+<script src="../js/data/experiments-junior.js"></script>
+<script src="../js/data/experiments-senior-a.js"></script>
+<script src="../js/data/experiments-senior-b.js"></script>
+<script src="../js/data/experiments-extra.js"></script>
+<script src="../js/data/clip-captions.js"></script>
+<script src="../js/data/videos.js"></script>
+<script src="../js/data/catalog.js"></script>
+<script src="../js/data/journey.js"></script>
+<script src="../js/data/lab-chemistry.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/artwork.js"></script>
+<script src="../js/artwork-scenes.js"></script>
+<script src="../js/demos.js"></script>
+<script src="../js/challenge.js"></script>
+<script src="../js/reactor.js"></script>
+<script src="../js/lab.js"></script>
+<script src="../js/present.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

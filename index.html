@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChemLab Explorer</title>
+<meta name="description" content="A visual journey through chemistry for grades 7–12: 72 experiments, animated demonstration clips, “What happens next?” challenges, a mixing lab game and a presentation mode — in English and Albanian.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f4f6f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="images/icons/favicon.svg" type="image/svg+xml">
+<!-- sets the theme and language before the page is drawn -->
+<script src="js/boot.js"></script>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-page="home" data-root="">
+<!-- the icon set (images/icons/) is put into the page here -->
+<script src="js/icons.js"></script>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<!-- ================= APP BAR ================= -->
+<header class="appbar">
+  <div class="container">
+    <a class="brand" href="index.html" data-nav="home" aria-label="ChemLab Explorer">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#i-brand"/></svg>
+      <span class="brand-name">ChemLab <i>Explorer</i></span>
+    </a>
+    <nav class="nav" aria-label="Main" data-i18n-label="navMain">
+      <a href="index.html#journey" data-nav="home" data-section="journey" data-i18n="navJourney" aria-current="page">Journey</a>
+      <a href="pages/experiments.html" data-nav="experiments" data-i18n="navExperiments">Experiments</a>
+      <a href="pages/lab.html" data-nav="lab" data-i18n="navLab">Lab</a>
+      <a href="pages/about.html" data-nav="about" data-i18n="navAbout">About</a>
+    </nav>
+    <div class="bar-tools">
+      <a class="btn btn-sm btn-ink present-btn" href="pages/present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span class="lbl" data-i18n="present">Present</span></a>
+      <button type="button" class="icon-btn" data-theme-btn></button>
+      <div class="seg" role="group" aria-label="Language" data-i18n-label="language">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
+        <button type="button" data-lang="sq" aria-pressed="false" lang="sq" title="Shqip">SQ</button>
+      </div>
+      <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" data-i18n-label="menu"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <a href="index.html#journey" data-nav="home" data-section="journey" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-compass"/></svg><span data-i18n="navJourney">Journey</span></a>
+  <a href="pages/experiments.html" data-nav="experiments"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-tubes"/></svg><span data-i18n="navExperiments">Experiments</span></a>
+  <a href="pages/lab.html" data-nav="lab"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-beaker"/></svg><span data-i18n="navLab">Lab</span></a>
+  <a href="pages/about.html" data-nav="about"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><span data-i18n="navAbout">About</span></a>
+  <a href="pages/present.html" data-present="0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-present"/></svg><span data-i18n="presentMode">Presentation mode</span></a>
+</div>
+
+<!-- ================= OPENING ================= -->
+<section class="opening" id="top" aria-labelledby="op-title">
+  <div class="op-art" aria-hidden="true"></div>
+  <div class="container op-inner">
+    <div class="op-copy">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="opKicker">Interactive chemistry · grades 7–12</span></span>
+      <h1 class="display op-title" id="op-title">Discover chemistry through experiments.</h1>
+      <p class="lead" data-i18n="opLead"></p>
+      <div class="op-ctas">
+        <a class="btn btn-primary btn-lg" href="#journey" data-goto="journey"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-compass"/></svg><span data-i18n="ctaJourney">Start the journey</span></a>
+        <a class="btn btn-lg" href="pages/experiments.html" data-nav="experiments"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-tubes"/></svg><span data-i18n="ctaExplore">Explore experiments</span></a>
+        <a class="btn btn-lg btn-ghost" href="pages/lab.html" data-nav="lab"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-beaker"/></svg><span data-i18n="ctaLab">Enter the lab</span></a>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="op-flask-btn" data-i18n-label="tapFlaskLabel"></button>
+  <button type="button" class="op-tap"><span class="t-ico" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sparkle"/></svg></span><span data-i18n="tapFlask">Tap the flask!</span></button>
+  <a class="scroll-cue" href="#journey" data-goto="journey"><span data-i18n="scroll">Scroll</span><svg class="ic cue-down" aria-hidden="true" focusable="false"><use href="#i-chev-r"/></svg></a>
+</section>
+
+<!-- on phones the text sits below the artwork, so a wave band leads into the journey -->
+<div class="edge-band band-intro" data-band="intro"></div>
+
+<main id="main">
+<!-- ================= JOURNEY (scenes are drawn by js/home.js) ================= -->
+<div id="journey"></div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<div class="edge-band band-footer" data-band="foot-edge"></div>
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div><h3 class="foot-brand">ChemLab <i>Explorer</i></h3><p data-i18n="footAbout"></p>
+        <p class="safety-note"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><span data-i18n="safetyStrip"></span></p></div>
+      <div><h3 data-i18n="footExplore">Explore</h3><ul>
+        <li><a href="index.html#journey" data-nav="home" data-section="journey" data-i18n="navJourney">Journey</a></li>
+        <li><a href="pages/experiments.html" data-nav="experiments" data-i18n="navExperiments">Experiments</a></li>
+        <li><a href="pages/lab.html" data-nav="lab" data-i18n="navLab">Lab</a></li>
+        <li><a href="pages/present.html" data-present="0" data-i18n="presentMode">Presentation mode</a></li>
+        <li><a href="pages/about.html" data-nav="about" data-i18n="navAbout">About</a></li></ul></div>
+      <div><h3 data-i18n="footTeachers">For teachers</h3><p data-i18n="teacherNote"></p><p data-i18n="footerNote"></p>
+        <p><a href="https://science.cleapss.org.uk/Resource-Info/Student-Safety-Sheets.aspx" target="_blank" rel="noopener noreferrer" data-i18n="cleapssLink">CLEAPSS Student Safety Sheets</a></p></div>
+    </div>
+    <div class="foot-bottom"><span data-i18n="footBottom"></span><span data-i18n="footKeys"></span></div>
+  </div>
+</footer>
+
+<div class="wipe" id="wipe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="toast" id="toast" role="status"></div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<noscript><p class="noscript-msg">ChemLab Explorer needs JavaScript. Please allow JavaScript, or open this page in a modern browser (Chrome, Edge, Firefox or Safari).</p></noscript>
+
+<!-- ================= SCRIPTS (data first, then the parts this page uses) ================= -->
+<script src="js/data/ui-text.js"></script>
+<script src="js/data/experiments-core.js"></script>
+<script src="js/data/experiments-junior.js"></script>
+<script src="js/data/experiments-senior-a.js"></script>
+<script src="js/data/experiments-senior-b.js"></script>
+<script src="js/data/experiments-extra.js"></script>
+<script src="js/data/clip-captions.js"></script>
+<script src="js/data/videos.js"></script>
+<script src="js/data/catalog.js"></script>
+<script src="js/data/journey.js"></script>
+<script src="js/app.js"></script>
+<script src="js/artwork.js"></script>
+<script src="js/artwork-scenes.js"></script>
+<script src="js/challenge.js"></script>
+<script src="js/home.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

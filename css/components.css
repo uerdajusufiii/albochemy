@@ -1,0 +1,49 @@
+/* ChemLab Explorer — components.css
+   Shared components: the "What happens next?" challenge card and related-experiment chips. */
+
+/* related experiments */
+.related{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:var(--sp-6)}
+.related .lbl{font-weight:800;font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--s-ink-2,var(--ink-2));margin-right:4px}
+.rel-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px 7px 7px;border-radius:var(--r-pill);background:var(--card);color:var(--ink);text-decoration:none;font-weight:700;font-size:var(--fs-xs);
+  box-shadow:0 2px 0 var(--edge),inset 0 0 0 1px var(--line);transition:transform .15s,box-shadow .15s}
+.rel-chip:hover{transform:translateY(-2px);box-shadow:0 4px 0 var(--edge),inset 0 0 0 1.5px var(--turq-line)}
+.rel-chip .ri{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--topic);color:var(--on-topic)}
+.rel-chip .ri .ic{width:14px;height:14px}
+.scene.dark-scene .rel-chip{background:#1b2d48;color:#eef3f8;box-shadow:0 2px 0 rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12)}
+.scene.dark-scene .rel-chip:hover{box-shadow:0 4px 0 rgba(0,0,0,.5),inset 0 0 0 1.5px rgba(58,183,180,.6)}
+/* ---------- "What happens next?" card (used in scenes, experiment pages and slides) ---------- */
+.whn{margin-top:var(--sp-8);padding:clamp(18px,2.4vw,28px);border-radius:var(--r-xl);background:var(--card);color:var(--ink);box-shadow:var(--sh-2),inset 0 0 0 1px var(--line);position:relative}
+.whn-head{display:flex;align-items:center;gap:12px;margin-bottom:var(--sp-3)}
+.whn-badge{width:44px;height:44px;flex:0 0 auto;border-radius:14px;display:grid;place-items:center;background:var(--turq-strong);color:var(--on-turq);font-family:var(--display);font-weight:700;font-size:1.6rem;transform:rotate(-6deg)}
+.whn-label{font-weight:800;font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.whn-q{font-size:clamp(1.08rem,1rem + .4vw,1.28rem);font-weight:700;line-height:1.4;margin-bottom:var(--sp-4)}
+.whn-opts{display:grid;gap:10px}
+.whn-opt{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:10px 14px 10px 10px;border:0;border-radius:var(--r-lg);background:var(--card-2);color:var(--ink);text-align:left;font-weight:700;font-size:var(--fs-sm);line-height:1.3;
+  box-shadow:inset 0 0 0 1.5px var(--line),0 3px 0 var(--edge);transition:transform .15s var(--ease),box-shadow .15s,background-color .2s,opacity .3s}
+.whn-opt:hover{transform:translateY(-2px);background:var(--turq-soft);box-shadow:inset 0 0 0 1.5px var(--turq-line),0 5px 0 var(--edge)}
+.whn-opt .k{width:34px;height:34px;flex:0 0 auto;border-radius:10px;display:grid;place-items:center;background:var(--paper-2);font-family:var(--display);font-weight:700;font-size:1.05rem}
+.whn-opt .st{margin-left:auto;width:22px;height:22px;flex:0 0 auto}
+.whn.locked .whn-opt{cursor:default;transform:none}
+.whn.locked .whn-opt:not(.is-correct):not(.is-wrong):not(.is-picked):hover{background:var(--card-2);box-shadow:inset 0 0 0 1.5px var(--line),0 3px 0 var(--edge)}
+.whn.locked .whn-opt:not(.is-correct):not(.is-wrong):not(.is-picked){opacity:.7}
+.whn-opt.is-picked{background:var(--brand);color:var(--on-brand);box-shadow:inset 0 0 0 2px var(--brand-edge),0 3px 0 var(--brand-edge)}
+.whn-opt.is-picked .k{background:color-mix(in srgb,var(--on-brand) 20%,transparent);color:var(--on-brand)}
+.whn-opt.is-correct{background:var(--ok-soft);box-shadow:inset 0 0 0 2px var(--ok),0 3px 0 var(--ok);color:var(--ink)}
+.whn-opt.is-correct .k{background:var(--ok);color:var(--on-accent)}
+.whn-opt.is-wrong{background:var(--bad-soft);box-shadow:inset 0 0 0 2px var(--bad);color:var(--ink)}
+.whn-opt.is-wrong .k{background:var(--bad);color:var(--on-accent)}
+.whn-opt.is-correct .st{color:var(--ok)}
+.whn-opt.is-wrong .st{color:var(--bad)}
+.whn-wait{display:flex;align-items:center;gap:10px;margin-top:var(--sp-4);font-weight:700;color:var(--ink-2);font-size:var(--fs-sm)}
+.whn-wait .dots{display:inline-flex;gap:4px}
+.whn-wait .dots i{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:dotb 1s ease-in-out infinite}
+.whn-wait .dots i:nth-child(2){animation-delay:.15s;background:var(--sky)}
+.whn-wait .dots i:nth-child(3){animation-delay:.3s;background:var(--cobalt)}
+.whn-result{margin-top:var(--sp-5);padding:var(--sp-5);border-radius:var(--r-lg);background:var(--paper-2);animation:popIn .6s var(--ease-back) both}
+.whn-result .big{font-family:var(--display);font-style:italic;font-weight:700;font-size:clamp(1.4rem,1.1rem + 1.2vw,2rem);line-height:1.15;margin-bottom:var(--sp-2)}
+.whn-result .verdict{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:var(--fs-xs);letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:var(--r-pill);margin-bottom:var(--sp-3)}
+.whn-result .verdict.ok{background:var(--ok);color:var(--on-accent)}
+.whn-result .verdict.surprise{background:var(--brand);color:var(--on-brand)}
+.whn-result .verdict .ic{width:16px;height:16px;stroke-width:2.6}
+.whn-result p{color:var(--ink-2)}
+.whn-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--sp-4)}

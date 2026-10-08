@@ -1,0 +1,81 @@
+/* ChemLab Explorer — layout.css
+   Page layout shared by every page: app bar, menu, page transition, footer and toast. */
+
+.appbar{position:fixed;top:0;left:0;right:0;z-index:300;height:calc(var(--bar-h) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);transition:background-color .3s,box-shadow .3s,transform .35s var(--ease)}
+.appbar.solid{background:color-mix(in srgb,var(--paper) 86%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);box-shadow:0 1px 0 var(--line)}
+.appbar .container{height:var(--bar-h);display:flex;align-items:center;gap:var(--sp-4)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);margin-right:auto;min-width:0}
+.brand-mark{width:42px;height:42px;flex:0 0 auto;filter:var(--paper-shadow)}
+.brand-name{font-family:var(--display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em;line-height:1;white-space:nowrap}
+.brand-name i{font-style:italic;color:var(--turq-ink)}
+.nav{display:none;gap:2px;padding:4px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--card) 70%,transparent);box-shadow:inset 0 0 0 1px var(--line)}
+.nav a{padding:8px 15px;border-radius:var(--r-pill);color:var(--ink-2);font-weight:700;font-size:var(--fs-sm);text-decoration:none;transition:background-color .15s,color .15s}
+.nav a:hover,.nav a[aria-current="page"]{background:var(--card);color:var(--ink);box-shadow:0 2px 0 var(--edge)}
+.nav a[aria-current="page"]{color:var(--turq-ink)}
+.bar-tools{display:flex;align-items:center;gap:var(--sp-2)}
+.present-btn .lbl{display:none}
+.menu-btn{display:inline-grid}
+.bar-tools .seg button{padding:0 10px}
+.menu{position:fixed;z-index:290;top:calc(var(--bar-top) + 6px);left:12px;right:12px;padding:var(--sp-3);border-radius:var(--r-xl);background:var(--card);box-shadow:var(--sh-3),inset 0 0 0 1px var(--line);
+  display:grid;gap:4px;transform-origin:top right;opacity:0;transform:scale(.96) translateY(-6px);pointer-events:none;visibility:hidden;
+  transition:opacity .2s,transform .25s var(--ease),visibility 0s linear .25s}
+.menu.open{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .2s,transform .25s var(--ease),visibility 0s}
+.menu a,.menu button{display:flex;align-items:center;gap:12px;padding:14px 16px;border:0;border-radius:var(--r-lg);background:transparent;color:var(--ink);font-weight:700;font-size:var(--fs-lg);text-decoration:none;text-align:left}
+.menu a:hover,.menu button:hover{background:var(--paper-2)}
+.menu a[aria-current="page"]{background:var(--turq-soft);color:var(--turq-ink);box-shadow:inset 0 0 0 1.5px var(--turq-line)}
+.menu .ic{width:22px;height:22px;color:var(--turq-ink)}
+/* Page transition: coloured paper sheets sweep across the screen */
+.wipe{position:fixed;inset:0;z-index:450;pointer-events:none;overflow:hidden}
+.wipe i{position:absolute;left:-5%;right:-5%;top:0;height:120%;transform:translateY(110%);border-radius:50% 50% 0 0/90px 90px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.18)}
+.wipe i:nth-child(1){--i:0;background:var(--sun)}
+.wipe i:nth-child(2){--i:1;background:var(--coral)}
+.wipe i:nth-child(3){--i:2;background:var(--cobalt)}
+.wipe i:nth-child(4){--i:3;background:var(--paper)}
+.wipe.cover i{animation:wipeIn .55s var(--ease) both;animation-delay:calc(var(--i) * 70ms)}
+.wipe.uncover i{animation:wipeOut .6s cubic-bezier(.6,0,.3,1) both;animation-delay:calc((3 - var(--i)) * 60ms)}
+/* arriving from another page of the site: the sheets start over the page and slide away */
+.arriving .wipe:not(.cover):not(.uncover):not(.fade) i{transform:translateY(-10%);animation:wipeOut .6s cubic-bezier(.6,0,.3,1) both;animation-delay:calc(.12s + (3 - var(--i)) * 60ms)}
+.wipe.fade{background:var(--paper);opacity:0;transition:opacity .18s}
+.wipe.fade.on{opacity:1}
+/* Footer */
+.footer{position:relative;background:var(--paper-2);padding:var(--sp-12) 0 var(--sp-10)}
+.foot-brand i{font-style:italic;color:var(--turq-ink)}
+.foot-grid{display:grid;gap:var(--sp-8)}
+.foot-grid h3{font-family:var(--display);font-size:var(--fs-xl);margin-bottom:var(--sp-3)}
+.foot-grid p,.foot-grid li{color:var(--ink-2);font-size:var(--fs-sm)}
+.foot-grid ul{list-style:none;display:grid;gap:8px}
+/* safety notes use the amber warning colours so they never look like the turquoise accent or a quiz answer */
+.safety-note{display:flex;gap:12px;align-items:flex-start;padding:var(--sp-4);border-radius:var(--r-lg);background:var(--warn-soft);box-shadow:inset 0 0 0 1px var(--warn-line);font-weight:600;font-size:var(--fs-sm)}
+.safety-note .ic{width:24px;height:24px;color:var(--warn);flex:0 0 auto}
+.foot-bottom{margin-top:var(--sp-10);padding-top:var(--sp-6);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:var(--sp-4);justify-content:space-between;align-items:center;color:var(--ink-3);font-size:var(--fs-xs)}
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:420;transform:translate(-50%,calc(100% + 40px));visibility:hidden;display:flex;align-items:center;gap:12px;max-width:min(92vw,520px);padding:12px 18px 12px 12px;
+  border-radius:var(--r-pill);background:var(--ink);color:var(--paper);font-weight:700;font-size:var(--fs-sm);box-shadow:var(--sh-3);transition:transform .45s var(--ease-back),visibility 0s .45s}
+.toast.on{transition:transform .45s var(--ease-back),visibility 0s}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+.toast .t-ico{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--turq);color:var(--on-light);flex:0 0 auto}
+.toast .t-ico .ic{width:20px;height:20px}
+
+/* ---------- Wave bands between sections ----------
+   A band sits in the normal page flow between two sections, so it can never
+   cover text, cards or buttons. Its background is the colour of the section
+   above (--from-l / --from-d) and its waves rise into the section below
+   (--c1, --c2, then --to-l / --to-d). */
+.edge-band{position:relative;z-index:0;display:block;height:var(--edge-h);margin-bottom:-1px;background:var(--edge-from);pointer-events:none;
+  --edge-from:var(--from-l,var(--paper));--edge-to:var(--to-l,var(--paper))}
+.edge-band svg{display:block;width:100%;height:calc(100% + 1px)}
+.band-footer{--from-l:var(--paper);--c1:var(--violet);--c2:var(--magenta);--to-l:var(--paper-2)}
+body[data-page="experiments"]:not([data-view="exp"]) .band-footer{--from-l:var(--paper-2)}
+.band-library{--from-l:var(--paper);--c1:var(--mint);--c2:var(--cobalt);--to-l:var(--paper-2)}
+.band-lab{--from-l:var(--paper-2);--c1:var(--sun);--c2:var(--coral);--to-l:var(--paper)}
+.band-about{--from-l:var(--s1bg);--c1:var(--sun);--c2:var(--mint);--to-l:var(--paper)}
+.band-intro{--from-l:var(--paper);--c1:var(--sun);--c2:var(--coral);--to-l:var(--s1bg)}
+
+/* ---------- Page heading on the inner pages (Experiments, Lab, About) ---------- */
+.page-head{position:relative;padding:calc(var(--bar-top) + clamp(28px,5vw,64px)) 0 clamp(20px,3vw,36px)}
+.page-head h1{font-size:var(--fs-4xl);margin:var(--sp-4) 0 var(--sp-3)}
+
+/* ---------- Small helpers ---------- */
+.ic-sm{width:15px;height:15px}
+.cue-down{rotate:90deg}
+.lab-holder{display:none}
